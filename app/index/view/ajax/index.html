@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+<button type="button" onclick="sendAjax();">原生发送ajax</button>
+<button type="button" id="btn">jq发送ajax</button>
+<div id="demo"></div>
+</body>
+
+<script type="text/javascript" src="__public__/static/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript">
+    //原生ajax
+    /*window.onload = function () {
+     sendAjax();
+     };*/
+    function encodeU(data) {
+        var str = '';
+        for (var i in data) {
+            str += encodeURIComponent(i) + '=' + encodeURIComponent(data) + '&';
+        }
+        return str.substr(0, str.length - 1);
+    }
+    var sendAjax = function () {
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener('readystatechange', function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert(typeof JSON.parse(JSON.stringify(xhr.responseText)));
+                var jsonObj = JSON.parse(JSON.stringify(xhr.responseText));
+                /*var str;*/
+
+                document.getElementById('demo').innerHTML = xhr.responseText;
+            }
+        });
+        xhr.open('get', '{:url("index/ajax/receive?name=ajax&age=14")}', true);
+        xhr.send(null);
+    };
+
+
+    //$.ajax()
+    /*$(function () {
+         $('#btn').click(function () {
+         $.ajax({
+             url: "{:url('index/ajax/ajax')}",
+             type: "post",
+             dataType: 'html',
+             data: {
+             name: 'ssss',
+             age: 12
+             },
+             success: function (data) {
+                $('#demo').html(data);
+             },
+             error: function () {
+                alert('error');
+             }
+             });
+         });
+     });*/
+
+</script>
+</html>
