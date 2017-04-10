@@ -13,12 +13,13 @@ class User extends Validate
 {
     protected $rule = [
         'username' => 'require|max:20',
-        'password' => 'require'
+        'password' => 'require|min:6'
     ];
 
     protected $message = [
         'username.require' => '用户名必填',
-        'username.max'     => '用户名最多不能超过20个字符',
-        'password'         => '密码必填'
+        'username.max' => '用户名最多不能超过20个字符',
+        'password.min' => '密码不能小于6位数',
+        'password' => '密码必填'
     ];
 }

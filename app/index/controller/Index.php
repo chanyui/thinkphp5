@@ -29,7 +29,7 @@ class Index extends Controller
             if ($result !== true) {
                 $this->error($result);
             } else {
-                $user = controller('User', 'event');
+                $user = controller('User', 'event')->userExist($data['username']);
                 if ($user) {
                     $this->error('用户已存在，请重新注册');
                 } else {
