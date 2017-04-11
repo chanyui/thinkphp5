@@ -11,5 +11,5 @@ use think\Model;
 
 class User extends Model
 {
-    protected $table = 'wt_user';
+    protected $table = 'y_user';
 }
