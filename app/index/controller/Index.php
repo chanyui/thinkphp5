@@ -14,9 +14,40 @@ class Index extends Controller
 
     public function index()
     {
-        return $this->fetch();
-    }
+        if (request()->isPost()) {
+            $data = input('post.');
+            $data['username'] = trim($data['username']);
+            $data['password'] = trim($data['password']);
+            $remember = input('post.remember') ? intval(input('post.remember')) : 0;
+            $result = $this->validate($data, 'User');
+            if ($result !== true) {
+                $this->error($result);
+            } else {
+                $dbres = $this->db->where('username', $data['username'])->find()->toArray();
+                if (check_password($data['password'], $dbres['salt'], $dbres['password'])) {
+                    if ($remember == 1) {
+                        $userData = $data['username'] . '\n' . $data['password'];
+                        $encode = authcode($userData, 'ENCODE');
+                        setcookie('user', $encode, time() + 24 * 3600);
+                    }
+                    unset($dbres['salt']);
+                    unset($dbres['password']);
+                    session('uid', $dbres);
 
+                    $this->success('登录成功', 'index/index/home');
+                } else {
+                    $this->error('登录失败');
+                }
+            }
+        } else {
+            $userCookie = cookie('user');
+            $deUserCookie = authcode($userCookie, 'DECODE');
+            list($username, $password) = explode('\n', $deUserCookie);
+            $this->assign('username', $username);
+            $this->assign('password', $password);
+            return $this->fetch();
+        }
+    }
 
     public function register()
     {
@@ -24,7 +55,6 @@ class Index extends Controller
             $data = input('post.');
             $data['username'] = trim($data['username']);
             $data['password'] = trim($data['password']);
-
             $result = $this->validate($data, 'User');
             if ($result !== true) {
                 $this->error($result);
@@ -48,35 +78,8 @@ class Index extends Controller
         }
     }
 
-    public function login()
-    {
-        if (request()->isPost()) {
-            $data = input('post.');
-            $data['password'] = trim($data['password']);
-
-            $result = $this->validate($data, 'User');
-            if ($result !== true) {
-                $this->error($result);
-            } else {
-                $dbres = $this->db->where('username', $data['username'])->find()->toArray();
-                if (check_password($data['password'], $dbres['salt'], $dbres['password'])) {
-                    unset($dbres['salt']);
-                    unset($dbres['password']);
-                    session('uid', $dbres);
-                    $this->success('登录成功', 'index/index/home');
-                } else {
-                    $this->error('登录失败', 'index/index/index');
-                }
-            }
-        } else {
-            return $this->fetch();
-        }
-    }
-
     public function home()
     {
         return $this->display('欢迎登陆');
     }
-
-
 }

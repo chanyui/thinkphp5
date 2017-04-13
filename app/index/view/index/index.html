@@ -64,21 +64,27 @@
 
                                     <div class="space-6"></div>
 
-                                    <form action="{:url('index/index/login')}" method="post">
+                                    <form action="{:url('index/index/index')}" method="post">
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Username" name="username" value="yucheng" />
+                                                           placeholder="Username" name="username" value="{$username}" />
                                                     <i class="ace-icon fa fa-user"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control"
-                                                           placeholder="Password" name="password" value="123456"/>
+                                                    <input id="pwd" type="password" class="form-control"
+                                                           placeholder="Password" name="password" value="{$password}"/>
                                                     <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix">
+                                                <span class="pull-left">
+                                                    <input type="checkbox" name="remember" value="1"><span class="font rember">记住我</span>
                                                 </span>
                                             </label>
 
@@ -152,5 +158,14 @@
         },6000)
     });
 </script>-->
+<script type="text/javascript">
+    $('#pwd').keydown(function (event) {
+        var keycode = event.keyCode;
+        if (keycode == 8 || keycode == 46) {
+            $('input[name="password"]').val('');
+        }
+    });
+
+</script>
 </body>
 </html>
