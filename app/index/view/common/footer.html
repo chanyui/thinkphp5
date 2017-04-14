@@ -1,0 +1,31 @@
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='__public__/static/ace/js/jquery.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='__public__/static/ace//js/jquery1x.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='__public__/static/ace//js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- inline scripts related to this page -->
+<!--<script type="text/javascript">
+    jQuery(function ($) {
+        var i = 2;
+        setInterval(function(){
+            $(".blur-login").css("background-image","url(__public__/static/ace/css/images/meteorshower"+i+".jpg)");
+            i++;
+            if(i>5){
+                i = 2;
+            }
+        },6000)
+    });
+</script>-->

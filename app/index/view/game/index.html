@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {include file="common:header"/}
+    {include file="common:header" /}
 </head>
 
 <body class="login-layout blur-login">
+
+
 <div class="main-container">
     <div class="main-content">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="login-container">
-                    <div class="center">
-                        <h1>
-                            <i class="ace-icon fa fa-leaf green"></i>
-                            <span class="red">验证</span>
-                            <span class="white" id="id-text2">表单</span>
-                        </h1>
-                        <h4 class="blue" id="id-company-text">&copy; Form</h4>
-                    </div>
 
                     <div class="space-6"></div>
 
@@ -27,32 +21,39 @@
                                 <div class="widget-main">
                                     <h4 class="header blue lighter bigger">
                                         <i class="ace-icon fa fa-coffee green"></i>
-                                        请输入用户信息
+                                        请输入数字
                                     </h4>
 
                                     <div class="space-6"></div>
 
-                                    <form action="{:url('index/index/index')}" method="post">
+                                    <form action="{:url('index/game/index')}" method="post">
                                         <fieldset>
-                                            <label class="block clearfix">
+                                            <label class="block clearfix col-xs-4">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Username" name="username" value="{$username}" />
-                                                    <i class="ace-icon fa fa-user"></i>
+                                                           placeholder="Num1" name="username" value="" />
+                                                    <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
-
-                                            <label class="block clearfix">
+                                            <label class="block clearfix col-xs-4">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input id="pwd" type="password" class="form-control"
-                                                           placeholder="Password" name="password" value="{$password}"/>
-                                                    <i class="ace-icon fa fa-lock"></i>
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Num1" name="username" value="" />
+                                                    <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
-
-                                            <label class="block clearfix">
-                                                <span class="pull-left">
-                                                    <input type="checkbox" name="remember" value="1"><span class="font rember">记住我</span>
+                                            <label class="block clearfix col-xs-4">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Num1" name="username" value="" />
+                                                    <!--<i class="ace-icon fa fa-user"></i>-->
+                                                </span>
+                                            </label>
+                                            <label class="block clearfix col-xs-4">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="Num1" name="username" value="" />
+                                                    <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
 
@@ -61,15 +62,15 @@
                                             <div class="clearfix">
 
                                                 <button type="button"
-                                                        class="width-35 pull-left btn btn-sm btn-primary">
+                                                        class="width-50 pull-left btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <a href="{:url('index/index/register')}" style="color: white;text-decoration: none"  class="bigger-110">注册</a>
+                                                    <a href="{:url('index/game/register')}" style="color: white;text-decoration: none"  class="bigger-110">生成4位随机数</a>
                                                 </button>
 
                                                 <button type="submit"
-                                                        class="width-35 pull-right btn btn-sm btn-primary">
+                                                        class="width-50 pull-right btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">登录</span>
+                                                    <span class="bigger-110">验证随机数</span>
                                                 </button>
                                             </div>
 
@@ -96,14 +97,5 @@
 <!-- /.main-container -->
 
 {include file="common:footer"/}
-<script type="text/javascript">
-    $('#pwd').keydown(function (event) {
-        var keycode = event.keyCode;
-        if (keycode == 8 || keycode == 46) {
-            $('input[name="password"]').val('');
-        }
-    });
-
-</script>
 </body>
 </html>

@@ -12,6 +12,15 @@ class Index extends Controller
         $this->db = model('User');
     }
 
+    /**
+     * 登录
+     * +------------------------------------------------------------------
+     * @functionName : index
+     * +------------------------------------------------------------------
+     * @author yucheng
+     * +------------------------------------------------------------------
+     * @return mixed
+     */
     public function index()
     {
         if (request()->isPost()) {
@@ -28,13 +37,15 @@ class Index extends Controller
                     if ($remember == 1) {
                         $userData = $data['username'] . '\n' . $data['password'];
                         $encode = authcode($userData, 'ENCODE');
-                        setcookie('user', $encode, time() + 24 * 3600);
+                        cookie('user', $encode, array('expire' => time() + 24 * 3600));
+                    } else {
+                        cookie('user', null, array('expire' => time() + 24 * 3600));
                     }
                     unset($dbres['salt']);
                     unset($dbres['password']);
                     session('uid', $dbres);
 
-                    $this->success('登录成功', 'index/index/home');
+                    $this->success('登录成功', 'index/home/index');
                 } else {
                     $this->error('登录失败');
                 }
@@ -42,13 +53,26 @@ class Index extends Controller
         } else {
             $userCookie = cookie('user');
             $deUserCookie = authcode($userCookie, 'DECODE');
-            list($username, $password) = explode('\n', $deUserCookie);
+            if ($deUserCookie) {
+                list($username, $password) = explode('\n', $deUserCookie);
+            } else {
+                $username = $password = '';
+            }
             $this->assign('username', $username);
             $this->assign('password', $password);
             return $this->fetch();
         }
     }
 
+    /**
+     * 注册
+     * +------------------------------------------------------------------
+     * @functionName : register
+     * +------------------------------------------------------------------
+     * @author yucheng
+     * +------------------------------------------------------------------
+     * @return mixed
+     */
     public function register()
     {
         if (request()->isPost()) {
@@ -78,8 +102,4 @@ class Index extends Controller
         }
     }
 
-    public function home()
-    {
-        return $this->display('欢迎登陆');
-    }
 }

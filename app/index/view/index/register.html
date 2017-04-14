@@ -1,39 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
-    <title>用户注册</title>
-
-    <meta name="description" content="User login page"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="__public__/static/ace/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="__public__/static/ace//css/font-awesome.min.css"/>
-
-    <!-- text fonts -->
-    <link rel="stylesheet" href="__public__/static/ace//css/ace-fonts.css"/>
-
-    <!-- ace styles -->
-    <link rel="stylesheet" href="__public__/static/ace//css/ace.min.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="__public__/static/ace//css/ace-part2.min.css"/>
-    <![endif]-->
-    <link rel="stylesheet" href="__public__/static/ace//css/ace-rtl.min.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="__public__/static/ace//css/ace-ie.min.css"/>
-    <![endif]-->
-    <link rel="stylesheet" href="__public__/static/ace//css/ace.onpage-help.css"/>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-    <!--[if lt IE 9]>
-    <script src="__public__/static/ace//js/html5shiv.js"></script>
-    <script src="__public__/static/ace//js/respond.min.js"></script>
-    <![endif]-->
+    {include file="common:header"/}
 </head>
 
 <body class="login-layout blur-login">
@@ -115,36 +83,6 @@
 </div>
 <!-- /.main-container -->
 
-<!-- basic scripts -->
-
-<!--[if !IE]> -->
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='__public__/static/ace//js/jquery.min.js'>" + "<" + "/script>");
-</script>
-
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='__public__/static/ace//js/jquery1x.min.js'>" + "<" + "/script>");
-</script>
-<![endif]-->
-<script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='__public__/static/ace//js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-</script>
-
-<!-- inline scripts related to this page -->
-<!--<script type="text/javascript">
-    jQuery(function ($) {
-        var i = 2;
-        setInterval(function(){
-            $(".blur-login").css("background-image","url(__public__/static/ace/css/images/meteorshower"+i+".jpg)");
-            i++;
-            if(i>5){
-                i = 2;
-            }
-        },6000)
-    });
-</script>-->
+{include file="common:footer"/}
 </body>
 </html>
