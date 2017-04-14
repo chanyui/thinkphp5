@@ -26,33 +26,33 @@
 
                                     <div class="space-6"></div>
 
-                                    <form action="{:url('index/game/index')}" method="post">
+                                    <form id="form" action="{:url('index/game/index')}" method="post">
                                         <fieldset>
                                             <label class="block clearfix col-xs-4">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="username" value="" />
+                                                           placeholder="Num1" name="num1" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
                                             <label class="block clearfix col-xs-4">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="username" value="" />
+                                                           placeholder="Num1" name="num2" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
                                             <label class="block clearfix col-xs-4">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="username" value="" />
+                                                           placeholder="Num1" name="num3" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
                                             <label class="block clearfix col-xs-4">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="username" value="" />
+                                                           placeholder="Num1" name="num4" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
@@ -64,7 +64,7 @@
                                                 <button type="button"
                                                         class="width-50 pull-left btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <a href="{:url('index/game/register')}" style="color: white;text-decoration: none"  class="bigger-110">生成4位随机数</a>
+                                                    <a href="{:url('index/game/getNum')}" style="color: white;text-decoration: none"  class="bigger-110">生成4位随机数</a>
                                                 </button>
 
                                                 <button type="submit"
@@ -98,4 +98,47 @@
 
 {include file="common:footer"/}
 </body>
+<script type="text/javascript" src="__public__/static/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#form').validate({
+            rules: {
+                num1: {
+                    required: true,
+                    digits:true
+                },
+                num2: {
+                    required: true,
+                    digits:true
+                },
+                num3: {
+                    required: true,
+                    digits:true
+                },
+                num4: {
+                    required: true,
+                    digits:true
+                }
+            },
+            messages: {
+                num1: {
+                    required: '请输入数字',
+                    digits: '请输入整数'
+                },
+                num2: {
+                    required: '请输入数字',
+                    digits: '请输入整数'
+                },
+                num3: {
+                    required: '请输入数字',
+                    digits: '请输入整数'
+                },
+                num4: {
+                    required: '请输入数字',
+                    digits: '请输入整数'
+                }
+            }
+        });
+    });
+</script>
 </html>
