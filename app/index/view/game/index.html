@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
     {include file="common:header" /}
+    <style>
+        .login-container {
+            width: 600px;
+        }
+    </style>
 </head>
 
 <body class="login-layout blur-login">
@@ -28,47 +33,47 @@
 
                                     <form id="form" action="{:url('index/game/index')}" method="post">
                                         <fieldset>
-                                            <label class="block clearfix col-xs-4">
+                                            <label class="block clearfix col-xs-3">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
                                                            placeholder="Num1" name="num1" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
-                                            <label class="block clearfix col-xs-4">
+                                            <label class="block clearfix col-xs-3">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="num2" value="" />
+                                                           placeholder="Num2" name="num2" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
-                                            <label class="block clearfix col-xs-4">
+                                            <label class="block clearfix col-xs-3">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="num3" value="" />
+                                                           placeholder="Num3" name="num3" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
-                                            <label class="block clearfix col-xs-4">
+                                            <label class="block clearfix col-xs-3">
                                                 <span class="block input-icon input-icon-right">
                                                     <input type="text" class="form-control"
-                                                           placeholder="Num1" name="num4" value="" />
+                                                           placeholder="Num4" name="num4" value="" />
                                                     <!--<i class="ace-icon fa fa-user"></i>-->
                                                 </span>
                                             </label>
 
-                                            <div class="space"></div>
+                                            <div class="space-6"></div>
 
                                             <div class="clearfix">
 
                                                 <button type="button"
-                                                        class="width-50 pull-left btn btn-sm btn-primary">
+                                                        class="width-30 pull-left btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <a href="{:url('index/game/getNum')}" style="color: white;text-decoration: none"  class="bigger-110">生成4位随机数</a>
                                                 </button>
 
                                                 <button type="submit"
-                                                        class="width-50 pull-right btn btn-sm btn-primary">
+                                                        class="width-30 pull-right btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">验证随机数</span>
                                                 </button>
