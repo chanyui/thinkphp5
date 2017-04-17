@@ -32,7 +32,8 @@
 
                                     <div class="space-6"></div>
 
-                                    <form action="{:url('index/index/index')}" method="post">
+                                    <form id="login-form"  method="post">
+                                        <input type="hidden" name="issecret" value="{$issecret}"/>
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
@@ -45,7 +46,7 @@
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
                                                     <input id="pwd" type="password" class="form-control"
-                                                           placeholder="Password" name="password" value="{$password}"/>
+                                                           placeholder="Password" name="password" value="{$viewPwd}" data-secret="{$password}"/>
                                                     <i class="ace-icon fa fa-lock"></i>
                                                 </span>
                                             </label>
@@ -66,7 +67,7 @@
                                                     <a href="{:url('index/index/register')}" style="color: white;text-decoration: none"  class="bigger-110">注册</a>
                                                 </button>
 
-                                                <button type="submit"
+                                                <button type="button" id="login-btn"
                                                         class="width-35 pull-right btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登录</span>
@@ -97,11 +98,29 @@
 
 {include file="common:footer"/}
 <script type="text/javascript">
-    $('#pwd').keydown(function (event) {
-        var keycode = event.keyCode;
-        if (keycode == 8 || keycode == 46) {
-            $('input[name="password"]').val('');
-        }
+    $(function () {
+        //清除输入框的值
+        $('#pwd').keydown(function (event) {
+            var keycode = event.keyCode;
+            if (keycode == 8 || keycode == 46) {
+                $('input[name="password"]').val('');
+            }
+        });
+
+        //改变输入框的值时改变状态
+        $('#pwd').change(function () {
+            $('input[name="issecret"]').val('0');
+        });
+
+        //表单提交
+        $('#login-btn').click(function () {
+            if ($('input[name="issecret"]').val() == 1) {
+                var secret = $('#pwd').data('secret');
+                $('#pwd').val(secret);
+            }
+            $('#login-form').submit();
+        });
+
     });
 
 </script>

@@ -18,6 +18,7 @@ class Game extends Controller
             dump(session('numArr'));
             $data = input('post.');
             dump($data);
+            return $this->fetch();
         } else {
             return $this->fetch();
         }

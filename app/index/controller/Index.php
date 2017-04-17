@@ -28,6 +28,12 @@ class Index extends Controller
             $data['username'] = trim($data['username']);
             $data['password'] = trim($data['password']);
             $remember = input('post.remember') ? intval(input('post.remember')) : 0;
+
+            //是否要解密cookie密码
+            if (input('post.issecret')) {
+                $data['password'] = authcode($data['password'], 'DECODE');
+            }
+
             $result = $this->validate($data, 'User');
             if ($result !== true) {
                 $this->error($result);
@@ -39,7 +45,7 @@ class Index extends Controller
                         $encode = authcode($userData, 'ENCODE');
                         cookie('user', $encode, array('expire' => time() + 24 * 3600));
                     } else {
-                        cookie('user', null, array('expire' => time() + 24 * 3600));
+                        cookie('user', null, array('expire' => time() - 24 * 3600));
                     }
                     unset($dbres['salt']);
                     unset($dbres['password']);
@@ -47,7 +53,7 @@ class Index extends Controller
 
                     $this->success('登录成功', 'index/home/index');
                 } else {
-                    $this->error('登录失败');
+                    $this->error('登录密码错误');
                 }
             }
         } else {
@@ -55,11 +61,18 @@ class Index extends Controller
             $deUserCookie = authcode($userCookie, 'DECODE');
             if ($deUserCookie) {
                 list($username, $password) = explode('\n', $deUserCookie);
+                $leng = strlen($password);
+                $password && $issecret = true;
+                $password = $issecret ? authcode($password, 'ENCODE') : $password;
+                $viewPwd = substr($password, 0, $leng);
             } else {
-                $username = $password = '';
+                $username = $password = $viewPwd = '';
+                $issecret = 0;
             }
             $this->assign('username', $username);
             $this->assign('password', $password);
+            $this->assign('viewPwd', $viewPwd);
+            $this->assign('issecret', $issecret);
             return $this->fetch();
         }
     }
