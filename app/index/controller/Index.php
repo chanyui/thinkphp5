@@ -52,7 +52,7 @@ class Index extends Controller
                     unset($dbres['password']);
                     session('uid', $dbres);
 
-                    $this->success('登录成功', 'index/home/index');
+                    $this->success('登录成功', url('index/home/index'));
                 } else {
                     $this->error('登录密码错误');
                 }
