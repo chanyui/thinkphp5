@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use think\Controller;
+use think\Db;
 use OSS\OssClient;
 use OSS\Core\OssException;
 
@@ -43,4 +44,53 @@ class Home extends Controller
 
     }
 
+    /**
+     * 验证事务操作
+     * +------------------------------------------------------------------
+     * @functionName : routine
+     * +------------------------------------------------------------------
+     * @author yucheng
+     * +------------------------------------------------------------------
+     */
+    public function routine()
+    {
+        $dbTitle = db('title');
+        $dbContent = db('content');
+        //开启事务
+        $dbTitle->startTrans();
+
+        $data1 = array(
+            'title' => '新增1',
+            'addtime' => time()
+        );
+        $data2 = array(
+            'title' => '新增2',
+            'addtime' => time()
+        );
+        $res1 = $dbTitle->insert($data1);
+        $res2 = $dbTitle->insert($data2);
+
+        if ($res1 && $res2) {
+            //提交事务
+            $dbTitle->commit();
+        } else {
+            //回滚事务
+            $dbTitle->rollback();
+        }
+
+        /*try{
+            $data = array(
+                'title' => '新增',
+                'addtime' => time()
+            );
+            $res1 = $dbTitle->insert($data);
+            $res2 = $dbTitle->insert($data);
+
+            //提交事务
+            $dbTitle->commit();
+        } catch (\Exception $e) {
+            //回滚事务
+            $dbTitle->rollback();
+        }*/
+    }
 }
