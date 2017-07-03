@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file="common:header"/}
+    <link rel="stylesheet" type="text/css" href="__public__/common/css/commit-achievement.css">
+</head>
+
+<body class="login-layout blur-login">
+<div class="main-container">
+    <div class="main-content">
+        <div class="col-md-9">
+            <div class="card-list">
+                <div class="card-content">
+                    <form role="form" class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <p class="col-sm-2 control-label">
+                                <label class="red-font">*</label>
+                                <span>网店装修</span>
+                            </p>
+                            <div class="col-sm-10">
+                                <div id="makerfield">
+                                    <div id="img_" class="img-container" style="background-image:url('')">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </div>
+                                </div>
+                                <div id="makervalue">
+                                    <input type="hidden" id="input" name="makerimg[]" value="" />
+                                </div>
+                                <p><input type="file" id="upload" name="upload"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="common:footer"/}
+</body>
+<script type="text/javascript" src="__public__/common/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
+    jQuery.ready(function () {
+        $('#upload').uploadify({
+            'queueSizeLimit' : 20,
+            'removeTimeout'  : 0.5,
+            'uploadLimit'    : 12,
+            'preventCaching' : true,
+            'multi'          : true,
+            'swf'            : '__public__/common/uploadify/uploadify.swf',
+            'uploader'       : '{:url("index/tools/image")}',
+            'buttonText'     : '<img src="__public__/common/uploadify/add.png">',
+            'fileTypeExts'   : '*.jpg; *.png; *.gif;',
+            'onUploadSuccess': function(file, data, response){
+                console.log(data);
+            }
+        });
+    });
+</script>
+</html>
