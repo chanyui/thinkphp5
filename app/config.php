@@ -132,7 +132,7 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__public__' => dirname($_SERVER['SCRIPT_NAME']),
+        '__public__' => ''
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
@@ -230,4 +230,19 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    'QRCODE_DIR' => ROOT_PATH . '/qrcode',
+
+    //ffmpeg路径配置
+    'FFMPEG_PATH' => '/usr/local/bin/ffmpeg -i "%s" 2>&1',
+
+    'sendmail' => [
+        'mail_type' => 'smtp',
+        'mail_auth' => true,
+        'mail_host' => 'smtp.163.com',
+        'mail_port' => '25', //phpmailer-587|swiftmailer-25
+        'mail_user' => 'yuriychan@163.com',
+        'mail_pwd' => 'yucheng199284',
+        'send_name' => '一封来自网易的飞鸽传书'
+    ]
 ];
