@@ -2,10 +2,9 @@
 
 namespace app\index\controller;
 
-
-use app\index\logic\container\IocContainerLogic;
+use app\common\logic\superMan\SuperManLogic;
+use app\common\service\iocContainer\IocContainerService;
 use think\Controller;
-use app\index\service\container\IocContainerService;
 
 class Tools extends Controller
 {
@@ -34,21 +33,21 @@ class Tools extends Controller
         return $this->fetch();
     }
 
-
     /**
      * 使用IoC容器的方法
      */
-    public function iocContainer()
+    public function index()
     {
         // 创建一个容器（后面称作超级工厂）
         $container = new IocContainerService();
 
         // 向该 超级工厂添加超人的生产脚本
-        IocContainerLogic::bindInstance('SuperManService', $container);
-        // 开始启动生产
-        $result = $container->make('SuperManService', ['XpowerService'])->test();
+        SuperManLogic::bindInstance('SuperManService', $container);
 
-        dump($result);
+        // 开始启动生产
+        $res1 = $container->make('SuperManService', ['XpowerService'])->action(['能力X-Power']);
+        $res2 = $container->make('SuperManService', ['UltraBombService'])->action(['终极爆炸能力']);
+        dump($res2);
     }
 
 }

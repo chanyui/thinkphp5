@@ -22,4 +22,8 @@ return [
         'view'       => ['index/index'],
     ],
     // 其他更多的模块定义
+    'common' => [
+        '__file__'   => ['common.php'],
+        '__dir__'    => ['logic', 'controller', 'model', 'service'],
+    ]
 ];

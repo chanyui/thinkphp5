@@ -2,12 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: yc
- * Date: 2018/5/6
- * Time: 11:18
- * Desc: 这种更为高级的工厂，就是工厂模式的升华 —— IoC 容器。
+ * Date: 2018/5/8
+ * Time: 16:44
  */
 
-namespace app\index\service\container;
+namespace app\common\service\iocContainer;
+
 
 class IocContainerService
 {
@@ -16,7 +16,9 @@ class IocContainerService
     private static $instances;
 
     /**
-     * 0工厂注册函数
+     * 来自 laravel 的IoC容器解释(工厂模式的升华)
+     * http://laravelacademy.org/post/769.html
+     * 工厂注册函数
      */
     public function bind($abstract, $concrete)
     {
@@ -35,7 +37,9 @@ class IocContainerService
         if (isset(self::$instances[$abstract])) {
             return self::$instances[$abstract];
         }
+
         array_unshift($parameters, $this);
+
         return call_user_func_array(self::$binds[$abstract], $parameters);
     }
 }
