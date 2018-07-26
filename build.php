@@ -25,5 +25,13 @@ return [
     'common' => [
         '__file__'   => ['common.php'],
         '__dir__'    => ['logic', 'controller', 'model', 'service'],
+    ],
+
+    // api模块
+    'api' => [
+        '__dir__'    => ['controller', 'model', 'logic', 'service'],
+        'controller' => ['Index', 'Test'],
+        'model'      => [],
     ]
+
 ];

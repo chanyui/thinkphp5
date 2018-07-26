@@ -633,7 +633,7 @@ if (!function_exists('get_session')) {
  * Function:set_online
  * @param $uid
  */
-function set_online($uid)
+/*function set_online($uid)
 {
     $db = M('user');
     $tmp = array(
@@ -655,7 +655,7 @@ function set_online($uid)
     } else {
         $db->add($expriy);
     }
-}
+}*/
 
 
 /**
@@ -942,7 +942,7 @@ if (!function_exists('bubble_sort')) {
 /**
  * 获取日期和星期，默认为当前时间
  * +----------------------------------------------------------
- * @param  $string $del1,$del2,$del3,$time
+ * @param $string $time $del1,$del2,$del3
  * +----------------------------------------------------------
  * @return string
  * +----------------------------------------------------------
@@ -1256,6 +1256,25 @@ if (!function_exists('url_decode')) {
     }
 }
 
+/**
+ * 用户加密
+ */
+if (!function_exists('user_encode')) {
+    function user_encode($string = NULL, $key = '')
+    {
+        return urlencrypt($string, 'E', $key);
+    }
+}
+
+/**
+ * 用户解密
+ */
+if (!function_exists('user_decode')) {
+    function user_decode($string = NULL, $key = '')
+    {
+        return urlencrypt($string, 'D', $key);
+    }
+}
 
 /*********************************************************************
  * 函数名称:urlencrypt
