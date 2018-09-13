@@ -6,7 +6,7 @@
  * Time: 上午9:19
  */
 
-namespace Common\Logic\Redis;
+namespace app\common\service\redis;
 
 use app\common\Service\RedisInterfaceService;
 use app\common\service\RedisService;

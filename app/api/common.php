@@ -11,7 +11,7 @@ if (!function_exists('get_user')) {
             return false;
         }
         if (\app\api\service\redis\LoginRedisService::checkPaymentIsExist($user_id)) {
-            return \app\api\service\redis\LoginRedisService::getRedis($user_id);
+            return json_decode(\app\api\service\redis\LoginRedisService::getRedis($user_id), true);
         } else {
             return false;
         }

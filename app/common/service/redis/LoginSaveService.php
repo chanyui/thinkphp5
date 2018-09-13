@@ -6,7 +6,7 @@
  * Time: 下午1:58
  */
 
-namespace Common\Logic\Redis;
+namespace app\common\service\redis;
 
 use app\common\Service\RedisInterfaceService;
 use app\common\service\RedisService;
@@ -80,7 +80,7 @@ class LoginSaveService implements RedisInterfaceService
      * @param $key
      * @return int
      */
-    public static function checkPaymentIsExist($key, $type = '')
+    public static function checkPaymentIsExpired($key, $type = '')
     {
         $key = self::setKeyRedis($type, $key);
         return RedisService::getInstance()->exists($key);

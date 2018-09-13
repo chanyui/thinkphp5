@@ -1438,3 +1438,44 @@ if (!function_exists('build_order_no')) {
         return date('ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
     }
 }
+
+
+// +----------------------------------------------------------------------
+// | Author: Lance Li
+// +----------------------------------------------------------------------
+// | Version: 生成随机数
+// +----------------------------------------------------------------------
+// | param: int $length 生成长度
+// +----------------------------------------------------------------------
+// | param: bool $onlyNum 是否只有数字
+// +----------------------------------------------------------------------
+// | return: string
+// +----------------------------------------------------------------------
+// | Last edit time: 2018-6-1
+// +----------------------------------------------------------------------
+if (!function_exists('rand_char')) {
+    function rand_char($length, $onlyNum = false)
+    {
+        $str = null;
+        $strDict = $onlyNum ? '0123456789' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+        $max = strlen($strDict) - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $str .= $strDict[rand(0, $max)];
+        }
+        return $str;
+    }
+}
+
+/**
+ * 计算间隔时间
+ */
+if (!function_exists('countSpaceTime')) {
+    function countSpaceTime($beginTime)
+    {
+        $total = $beginTime - time();
+        $day = floor($total / 24 / 3600);
+        $hour = floor(($total - $day * 24 * 3600) / 3600);
+        $minute = ceil(($total - $day * 24 * 3600 - $hour * 3600) / 60);
+        return $day . '天' . $hour . '小时' . $minute . '分';
+    }
+}
