@@ -1479,3 +1479,95 @@ if (!function_exists('countSpaceTime')) {
         return $day . '天' . $hour . '小时' . $minute . '分';
     }
 }
+
+/**
+ * 异步操作
+ * 向xunsearch索引库中添加文档
+ * @param string $project_name 项目名称
+ * @param mixed $data 字段信息
+ * @param bool $is_flush 是否立即生效
+ */
+if (!function_exists('xunsearchAddIndex')) {
+    function xunsearchAddIndex($project_name, $data, $is_flush = false)
+    {
+        //引入xunsearch的基类
+        import('vendor/hightman/xunsearch/lib/XS', ROOT_PATH);
+        // 建立 XS 对象，项目名称为：shop
+        $xs = new \XS($project_name);
+
+        // 创建XSDocument对象，用于描述检索/索引的基础对象
+        $doc = new \XSDocument();
+        $doc->setFields($data);
+
+        // 添加文档到索引数据库中
+        $index = $xs->getIndex();
+
+        if ($is_flush) {
+            // 添加到索引数据库中 并立即生效
+            return $index->add($doc)->flushIndex();
+        } else {
+            // 添加到索引数据库中 几秒钟的延迟
+            return $index->add($doc);
+        }
+    }
+}
+
+/**
+ * 异步操作
+ * 更新xunsearch索引库中文档
+ * @param string $project_name 项目名称
+ * @param mixed $data 字段信息
+ * @param bool $is_flush 是否立即生效
+ */
+if (!function_exists('xunsearchUpdateIndex')) {
+    function xunsearchUpdateIndex($project_name, $data, $is_flush = false)
+    {
+        //引入xunsearch的基类
+        import('vendor/hightman/xunsearch/lib/XS', ROOT_PATH);
+        // 建立 XS 对象，项目名称为：shop
+        $xs = new \XS($project_name);
+
+        // 创建XSDocument对象，用于描述检索/索引的基础对象
+        $doc = new \XSDocument();
+        $doc->setFields($data);
+
+        // 添加文档到索引数据库中
+        $index = $xs->getIndex();
+
+        if ($is_flush) {
+            // 添加到索引数据库中 并立即生效
+            return $index->update($doc)->flushIndex();
+        } else {
+            // 添加到索引数据库中 几秒钟的延迟
+            return $index->update($doc);
+        }
+    }
+}
+
+/**
+ * 异步操作
+ * 删除xunsearch索引库中文档
+ * @param string $project_name 项目名称
+ * @param mixed $id 主键id或id数组
+ * @param bool $is_flush 是否立即生效
+ */
+if (!function_exists('xunsearchDelIndex')) {
+    function xunsearchDelIndex($project_name, $id, $is_flush = false)
+    {
+        //引入xunsearch的基类
+        import('vendor/hightman/xunsearch/lib/XS', ROOT_PATH);
+        // 建立 XS 对象，项目名称为：shop
+        $xs = new \XS($project_name);
+
+        // 添加文档到索引数据库中
+        $index = $xs->getIndex();
+
+        if ($is_flush) {
+            // 添加到索引数据库中 并立即生效
+            return $index->del($id)->flushIndex();
+        } else {
+            // 添加到索引数据库中 几秒钟的延迟
+            return $index->del($id);
+        }
+    }
+}

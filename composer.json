@@ -3,7 +3,8 @@
         "php": ">=5.5.9",
         "phpmailer/phpmailer": "~5.2",
         "swiftmailer/swiftmailer": "^6.0",
-        "PHPOffice/PHPExcel": "^1.8"
+        "PHPOffice/PHPExcel": "^1.8",
+        "hightman/xunsearch": "dev-master"
     },
     "config": {
         "preferred-install": "dist"
