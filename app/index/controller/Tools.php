@@ -51,4 +51,31 @@ class Tools extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 生成滑块验证码
+     * ! tncode 1.2 author:weiyingbin email:277612909@qq.com
+     * @ https://github.com/binwind8/tncode
+     */
+    public function tnCode()
+    {
+        error_reporting(0);
+        $tn = new \TnCode();
+        $tn->make();
+    }
+
+    /**
+     * 滑块验证码检查
+     */
+    public function check()
+    {
+        $tn = new \TnCode();
+        if ($tn->check()) {
+            $_SESSION['tncode_check'] = 'ok';
+            echo "ok";
+        } else {
+            $_SESSION['tncode_check'] = 'error';
+            echo "error";
+        }
+    }
+
 }

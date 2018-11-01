@@ -3,7 +3,7 @@
 <head>
     {include file="common:header"/}
 </head>
-
+<link rel="stylesheet" href="__public__/static/css/style.css">
 <body class="login-layout blur-login">
 <div class="main-container">
     <div class="main-content">
@@ -52,6 +52,10 @@
                                             </label>
 
                                             <label class="block clearfix">
+                                                <div class="tncode block"></div>
+                                            </label>
+
+                                            <label class="block clearfix">
                                                 <span class="pull-left">
                                                     <input type="checkbox" name="remember" value="1"><span class="font rember">记住我</span>
                                                 </span>
@@ -97,6 +101,7 @@
 <!-- /.main-container -->
 
 {include file="common:footer"/}
+<script type="text/javascript" src="__public__/static/js/tn_code.js"></script>
 <script type="text/javascript">
     $(function () {
         //清除输入框的值
