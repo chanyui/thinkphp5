@@ -10,5 +10,6 @@
 // +----------------------------------------------------------------------
 
 return [
-    'app\command\TestCommand',
+    'app\command\TestCommand',     //测试自定义命令行
+    'app\index\controller\Chat',     //websocket
 ];

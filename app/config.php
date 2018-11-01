@@ -231,6 +231,30 @@ return [
         'list_rows' => 15,
     ],
 
+    'db_config1' => [
+        // 数据库类型
+        'type'        => 'mysql',
+        // 数据库连接DSN配置
+        'dsn'         => '',
+        // 服务器地址
+        'hostname'    => 'rm-bp119377uz1v69n0t4o.mysql.rds.aliyuncs.com',
+        // 数据库名
+        'database'    => 'shop.busionline.com_new',
+        // 数据库用户名
+        'username'    => 'root',
+        // 数据库密码
+        'password'    => 'hzwotu123465A',
+        // 数据库连接端口
+        'hostport'    => '3306',
+        // 数据库连接参数
+        'params'      => [],
+        // 数据库编码默认采用utf8
+        'charset'     => 'utf8',
+        // 数据库表前缀
+        'prefix'      => 'mall_',
+    ],
+
+
     'QRCODE_DIR' => ROOT_PATH . '/qrcode',
 
     //ffmpeg路径配置
@@ -244,5 +268,21 @@ return [
         'mail_user' => 'yuriychan@163.com',
         'mail_pwd' => 'yucheng199284',
         'send_name' => '一封来自网易的飞鸽传书'
-    ]
+    ],
+
+    // swoole_websocket_server 配置选项
+    'swoole_websocket' => [
+        'host' => '0.0.0.0',
+        'port' => '58000',
+        'set' => [
+            'worker_num'               => 2,       //设置worker进程的最大任务数
+            'max_conn'                 => 1000,    //设置最大连接数
+            //'max_request'              => 100,     //设置worker进程的最大任务数
+            'heartbeat_check_interval' => 600,    //启用心跳检测，此选项表示每隔多久轮循一次，单位为秒
+            'heartbeat_idle_time'      => 3600,    //一个TCP连接如果在3600秒内未向服务器端发送数据，将会被切断
+            'daemonize'                => 0,       //是否开启守护进程
+            'log_level'                => 1,       //设置swoole_server错误日志打印的等级
+            'log_file'                 => LOG_PATH . 'swoole.log'//日志存放
+        ]
+    ],
 ];
