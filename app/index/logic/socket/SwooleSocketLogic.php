@@ -6,7 +6,7 @@
  * Time: 14:43
  */
 
-namespace app\index\logic;
+namespace app\index\logic\socket;
 
 
 use app\index\model\Chats;

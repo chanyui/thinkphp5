@@ -6,7 +6,7 @@
  * Time: 14:52
  */
 
-namespace app\index\logic;
+namespace app\index\logic\socket;
 
 
 interface SocketInterface
