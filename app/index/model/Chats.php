@@ -20,9 +20,12 @@ class Chats extends Model
      */
     public function loadHistory($uid, $to_uid)
     {
-        $where = '(uid = ' . $uid . ' and touid = ' . $to_uid . ') or (uid=' . $to_uid . ' and touid=' . $uid . ')';
+        //$where = '(uid = ' . $uid . ' and touid = ' . $to_uid . ') or (uid=' . $to_uid . ' and touid=' . $uid . ')';
         $list = $this
-            ->where($where)
+            ->where(['uid' => $uid, 'touid' => $to_uid])
+            ->whereOr(function ($query) use ($uid, $to_uid) {
+                $query->where(['uid' => $to_uid, 'touid' => $uid]);
+            })
             ->limit(50)
             ->order('createTime', 'desc')
             ->select();
