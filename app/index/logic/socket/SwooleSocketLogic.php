@@ -287,9 +287,9 @@ class SwooleSocketLogic implements SocketInterface
      */
     private function filterBadWord($str)
     {
-        $word_arr = include_once(ROOT_PATH . 'extend/badWord/BadWord.php');
         static $badword = [];
         if (!$badword) {
+            $word_arr = include_once(ROOT_PATH . 'extend/badWord/BadWord.php');
             $badword = $word_arr;
         }
         $arr = array_fill(0, count($badword), '**');

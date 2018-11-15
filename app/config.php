@@ -280,7 +280,7 @@ return [
             //'max_request'              => 100,     //设置worker进程的最大任务数
             'heartbeat_check_interval' => 600,    //启用心跳检测，此选项表示每隔多久轮循一次，单位为秒
             'heartbeat_idle_time'      => 3600,    //一个TCP连接如果在3600秒内未向服务器端发送数据，将会被切断
-            'daemonize'                => 0,       //是否开启守护进程
+            'daemonize'                => 0,       //是否开启守护进程(0-不开启|1-开启)
             'log_level'                => 1,       //设置swoole_server错误日志打印的等级
             'log_file'                 => LOG_PATH . 'swoole.log'//日志存放
         ]
