@@ -264,7 +264,7 @@ return [
         'mail_type' => 'smtp',
         'mail_auth' => true,
         'mail_host' => 'smtp.163.com',
-        'mail_port' => '25', //phpmailer-587|swiftmailer-25
+        'mail_port' => '465', //phpmailer-587|swiftmailer-25
         'mail_user' => 'yuriychan@163.com',
         'mail_pwd' => 'yucheng199284',
         'send_name' => '一封来自网易的飞鸽传书'

@@ -78,4 +78,121 @@ class Tools extends Controller
         }
     }
 
+    /**
+     * 发送邮件(PHPmailer)
+     * +-----------------------------------------------------------
+     * @functionName : phpmailer
+     * +-----------------------------------------------------------
+     * @author yc
+     * +-----------------------------------------------------------
+     */
+    public function phpmailer()
+    {
+        $mailCofig = config('sendmail');
+        if (request()->isPost()) {
+            $defaulttitle = '愿得一人心，白首不相离。';
+            $body = <<<EOF
+            <p align="center">
+                皑如山上雪，皎若云间月。<br>
+                闻君有两意，故来相决绝。<br>
+                今日斗酒会，明旦沟水头。<br>
+                躞蹀御沟上，沟水东西流。<br>
+                凄凄复凄凄，嫁娶不须啼。<br>
+                愿得一人心，白首不相离。<br>
+                竹竿何袅袅，鱼尾何簁簁！<br>
+                男儿重意气，何用钱刀为！</p>
+EOF;
+            //上传文件
+            $file = request()->file('uploadfile');
+            $filePath = '';
+            if ($file) {
+                $config = array(
+                    'size' => 3145728,
+                    'ext' => ['jpg', 'gif', 'png', 'jpeg', 'xls', 'xlsx', 'pdf', 'doc', 'docx'],
+                );
+                $info = $file->validate($config)->move(ROOT_PATH . 'public' . DS . 'uploads');
+                if (!$info) {
+                    // 上传失败获取错误信息
+                    $this->error($file->getError(), url('tools/phpmailer'));
+                    exit();
+                } else {
+                    $filePath = './uploads' . DS . $info->getSaveName();
+                }
+            }
+            $toemail = input('post.toemail');
+            $title = input('post.title') ?: $defaulttitle;
+            $content = input('post.content') ? htmlspecialchars_decode(input('post.content')) : $body;
+            $res = sendPHPMail($toemail, $title, $content, $mailCofig, $filePath);
+            if ($filePath) {
+                unlink($filePath);
+            }
+            if ($res) {
+                $this->success('发送成功', url('tools/phpmailer'));
+            } else {
+                $this->error('发送失败');
+            }
+        } else {
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 发送邮件(swiftMailer)
+     * +-----------------------------------------------------------
+     * @functionName : swiftMailer
+     * +-----------------------------------------------------------
+     * @author yc
+     * +-----------------------------------------------------------
+     */
+    public function swiftMailer()
+    {
+        $mailCofig = config('sendmail');
+        if (request()->isPost()) {
+            $defaulsubject = '愿得一人心，白首不相离。';
+            $body = <<<EOF
+            <p align="center">
+                皑如山上雪，皎若云间月。<br>
+                闻君有两意，故来相决绝。<br>
+                今日斗酒会，明旦沟水头。<br>
+                躞蹀御沟上，沟水东西流。<br>
+                凄凄复凄凄，嫁娶不须啼。<br>
+                愿得一人心，白首不相离。<br>
+                竹竿何袅袅，鱼尾何簁簁！<br>
+                男儿重意气，何用钱刀为！</p>
+EOF;
+            //上传文件
+            $file = request()->file('uploadfile');
+            $filePath = '';
+            if ($file) {
+                $config = array(
+                    'size' => 3145728,
+                    'ext' => ['jpg', 'gif', 'png', 'jpeg', 'xls', 'xlsx', 'pdf', 'doc', 'docx'],
+                );
+                $info = $file->validate($config)->move(ROOT_PATH . 'public' . DS . 'uploads');
+                if (!$info) {
+                    // 上传失败获取错误信息
+                    $this->error($file->getError(), url('tools/phpmailer'));
+                    exit();
+                } else {
+                    $filePath = './uploads' . DS . $info->getSaveName();
+                }
+            }
+
+            $toemail = input('post.toemail');
+            $subject = input('post.title') ?: $defaulsubject;
+            $content = input('post.content') ? htmlspecialchars_decode(input('post.content')) : $body;
+            $res = sendSwiftMailer($toemail, $subject, $content, $mailCofig, $filePath);
+            if ($filePath) {
+                unlink($filePath);
+            }
+            if ($res) {
+                $this->success('发送成功', url('tools/phpmailer'));
+            } else {
+                $this->error('发送失败');
+            }
+        } else {
+            return $this->fetch('phpmailer');
+        }
+    }
+
 }

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>PHPMailer/SwiftMailer发送邮件</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="__public__/common/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__public__/common/bootstrapvalidator/css/bootstrapValidator.min.css">
+</head>
+<body>
+
+<form id="form" class="form-horizontal" action="{:url('tools/phpmailer')}" enctype="multipart/form-data" method="post">
+    <div style="height: 30px"></div>
+
+    <div class="form-group has-feedback">
+        <label class="col-md-2 control-label">收件人邮箱 <font color="red">*</font></label>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <input type="email" name="toemail" class="form-control" placeholder="请输入正确的邮箱">
+        </div>
+    </div>
+
+    <div class="form-group has-feedback">
+        <label class="col-md-2 control-label">邮箱标题 <font color="red">*</font></label>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+            <input type="text" name="title" class="form-control" placeholder="请输入邮箱标题">
+        </div>
+    </div>
+
+    <div class="form-group has-feedback">
+        <label class="col-md-2 control-label" id="labelId">邮件内容 <font color="red">*</font></label>
+        <div class="col-md-6" id="divId">
+            <script id="content" name="content" type="text/plain"></script>
+            <input class="form-control" type="text" id="inputContent" name="inputContent" style="height:0px;border:0px;margin:0px;padding:0px;">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label" style="float:left;padding-left:15px;">上传附件 <font color="red"></font></label>
+        <div class="col-xs-12 col-md-4">
+            <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                <button class="btn btn-primary fileinput-button" type="button">文件上传</button>
+                <input type="file" name="uploadfile" onchange="loadFile(this.files[0])" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+            </div>
+            <span id="filename" style="vertical-align: middle"></span>
+        </div>
+    </div>
+
+    <div class="col-md-3 control-label">
+        <button class="btn btn-info" type="submit">
+            <i class="ace-icon fa fa-check bigger-110"></i>
+            发送PHPMailer
+        </button>
+    </div>
+    <div class="col-md-3 control-label">
+        <button class="btn btn-primary" id="sendSwiftMailer" type="submit">
+            <i class="ace-icon fa fa-check bigger-110"></i>
+            发送SwiftMailer
+        </button>
+    </div>
+</form>
+
+<!--<div class="form-group">
+        <label for="descrption" class="col-sm-2 control-label">文本框</label>
+        <div class="col-sm-6">
+            <textarea class="col-sm-12 limited" name="text" id="descrption" rows="5" placeholder="最多字数150" maxlength="150"></textarea>
+        </div>
+    </div>-->
+
+<script type="text/javascript" src="__public__/common/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__public__/common/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="__public__/common/js/jquery.min.js"></script>
+<script type="text/javascript" src="__public__/common/bootstrap/js/bootstrap.min.js"></script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<!--<script type="text/javascript" charset="utf-8" src="__PUBLIC__/common/ueditor/lang/zh-cn/zh-cn.js"></script>-->
+<!--textarea框显示剩余可输入字符-->
+<!--<script type="text/javascript" src="__PUBLIC__/ace/js/uncompressed/jquery.inputlimiter.1.3.1.js"></script>-->
+<script type="text/javascript" src="__public__/common/bootstrapvalidator/js/bootstrapValidator.min.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        var ue = UE.getEditor('content', {
+            toolbars: [
+                ['fullscreen', 'source', 'undo', 'redo', 'bold', 'italic',
+                    'underline', 'fontborder', 'backcolor', 'fontsize', 'fontfamily',
+                    'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'searchreplace',
+                    'simpleupload','strikethrough', 'superscript', 'subscript', 'removeformat',
+                    'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
+                    'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist',
+                    'selectall', 'cleardoc', 'link', 'unlink', 'emotion', 'help']
+            ],
+            initialFrameHeight: 300
+        }).ready(function () {
+            /*找到UEditor的iframe*/
+            var margintop = $($('#content .edui-editor-toolbarbox')[0]).height();
+            $($('#divId i')[0]).css('margin-top', margintop);
+            var contents = $('#content').find('iframe').contents();
+            var fn = function () {
+                $("#inputContent").val(UE.getEditor('content').getContent());
+                $('#form').data('bootstrapValidator')   //重新验证inputName
+                    .updateStatus('inputContent', 'NOT_VALIDATED', null)
+                    .validateField('inputContent');
+                $($('#content div')[0]).css('border-color', $('#labelId').css('color'));
+            };
+
+            if (document.all) {   //document.all识别是否在IE下，在IE下为true
+                contents.get(0).attachEvent('onpropertychange', function (e) {
+                    fn();
+                });
+            } else {
+                contents.on('input', fn);
+            }
+        });
+
+        //文本框字数提示
+        /*$('textarea.limited').inputlimiter({
+            remText: '剩余可输入字数：%n  ,',
+            limitText: '最多字数 : %n.'
+        });*/
+
+        //提交表单对ueditor的验证
+        $('#form').submit(function () {
+            $('#form').data('bootstrapValidator')
+                .updateStatus('inputContent', 'NOT_VALIDATED', null)
+                .validateField('inputContent');
+            $($('#content div')[0]).css('border-color', $('#labelId').css('color'));
+        });
+
+        //表单验证
+        $('#form').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                toemail: {
+                    validators: {
+                        notEmpty: {
+                            message: '邮箱不能为空'
+                        },
+                        emailAddress: {
+                            message: '邮箱地址格式有误'
+                        }
+                    }
+                },
+                title: {
+                    validators: {
+                        notEmpty: {
+                            message: '邮箱标题不能为空'
+                        }
+                    }
+                },
+                inputContent: {   //所提交的控件name属性
+                    message: '所提交的数据不能为空',
+                    validators: {
+                        notEmpty: { //非空提示
+                            message: '邮件内容不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+        //发送swiftmailer邮件
+        $('#sendSwiftMailer').click(function () {
+            $('#form').attr('action', '{:url("tools/swiftMailer")}');
+        });
+    });
+    function loadFile(file){
+        $("#filename").html(file.name);
+    }
+</script>
+</body>
+</html>

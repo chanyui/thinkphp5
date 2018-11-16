@@ -258,8 +258,12 @@ if (!function_exists('readExcel')) {
 if (!function_exists('sendPHPMail')) {
     function sendPHPMail($tomail, $title, $body, $config = [], $filePath = '')
     {
+        //需要在 php.ini 里面配置
+        //openssl.cafile = /usr/local/openssl/cacert.pem
+        //openssl.capath = /usr/local/openssl/certs
+
         vendor('phpmailer.phpmailer.PHPMailerAutoload.php');
-        $mail = new PHPMailer();  // 实例化PHPMailer核心类
+        $mail = new \PHPMailer();  // 实例化PHPMailer核心类
 
         //Server settings
         // 是否启用smtp的debug进行调试 开发环境建议开启 生产环境注释掉即可 默认关闭debug调试模式
@@ -270,6 +274,8 @@ if (!function_exists('sendPHPMail')) {
             // smtp需要鉴权 这个必须是true
             $mail->SMTPAuth = true;
         }
+        // 开启 debug
+        //$mail->SMTPDebug  = 3;
         // 链接smtp.163.com域名服务器地址
         $mail->Host = $config['mail_host'];
         // smtp登录的账号 QQ邮箱即可

@@ -37,7 +37,7 @@ class Ajax extends Controller
      */
     public function getSuggestQuery()
     {
-        $keyword = I('get.keyword');
+        $keyword = input('get.keyword');
         if (!$keyword) {
             self::$code = 400;
             self::$msg = '请输入搜索词！';
