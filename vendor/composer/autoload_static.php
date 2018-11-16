@@ -6,18 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit95e447876aae8f9388cb76a281f659d9
 {
-    public static $files = array (
-        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'h' => 
         array (
             'hightman\\xunsearch\\' => 19,
-        ),
-        'E' => 
-        array (
-            'Egulias\\EmailValidator\\' => 23,
         ),
     );
 
@@ -25,10 +17,6 @@ class ComposerStaticInit95e447876aae8f9388cb76a281f659d9
         'hightman\\xunsearch\\' => 
         array (
             0 => __DIR__ . '/..' . '/hightman/xunsearch/wrapper/yii2-ext',
-        ),
-        'Egulias\\EmailValidator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
     );
 
@@ -38,13 +26,6 @@ class ComposerStaticInit95e447876aae8f9388cb76a281f659d9
             'PHPExcel' => 
             array (
                 0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
-            ),
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
             ),
         ),
     );

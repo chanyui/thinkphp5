@@ -356,31 +356,60 @@ if (!function_exists('sendPHPMail')) {
 if (!function_exists('sendSwiftMailer')) {
     function sendSwiftMailer($tomail, $subject, $body, $config = [], $filePath = '')
     {
-        $transport = (new Swift_SmtpTransport($config['mail_host'], $config['mail_port']))
+        vendor('swiftmailer.swift_required');
+
+        // 创建Transport对象，设置邮件服务器和端口号，并设置用户名和密码以供验证
+        $transport = Swift_SmtpTransport::newInstance($config['mail_host'], $config['mail_port'], 'ssl')
             ->setUsername($config['mail_user'])
             ->setPassword($config['mail_pwd']);
 
-        // Create the Mailer using your created Transport
-        $mailer = new Swift_Mailer($transport);
+        // 创建mailer对象
+        $mailer = Swift_Mailer::newInstance($transport);
+        $mailer->protocol = $config['mail_type'];
 
-        // Create a message
-        $message = (new Swift_Message($subject))
-            ->setFrom([$config['mail_user']])
-            ->setTo([$tomail])
+        // 创建message对象
+        $message = Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom(array($config['mail_user'] => $config['send_name']))
+            ->setTo(array($tomail))
+            ->setContentType('text/html')
             ->setBody($body);
 
-        // Send the message
+        if ($filePath) {
+            // 创建attachment对象，content-type这个参数可以省略
+            $attachment = Swift_Attachment::fromPath($filePath)
+                ->setFilename(basename($filePath));
+
+            // 添加附件
+            $message->attach($attachment);
+        }
+
+        // 用关联数组设置收件人地址，可以设置多个收件人
+        /*$message->setTo(array('to@qq.com' => 'toName'));*/
+
+        // 用关联数组设置发件人地址，可以设置多个发件人
+        /*$message->setFrom(array(
+            'from@163.com' => 'fromName',
+        ));*/
+
+        // 添加抄送人
+        /*$message->setCc(array(
+            'Cc@qq.com' => 'Cc'
+        ));*/
+
+        // 添加密送人
+        /*$message->setBcc(array(
+            'Bcc@qq.com' => 'Bcc'
+        ));*/
+
         try {
-            // 发送邮件 返回状态
-            $result = $mailer->send($message);
-            if ($result) {
+            if ($mailer->send($message)) {
                 return true;
             } else {
                 return false;
             }
-        } catch (Exception $exception) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $exception->getError();
+        } catch (Exception $e) {
+            echo 'There was a problem communicating with SMTP: ' . $e->getMessage();
         }
     }
 }
