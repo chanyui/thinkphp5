@@ -356,6 +356,10 @@ if (!function_exists('sendPHPMail')) {
 if (!function_exists('sendSwiftMailer')) {
     function sendSwiftMailer($tomail, $subject, $body, $config = [], $filePath = '')
     {
+        //需要在 php.ini 里面配置
+        //openssl.cafile = /usr/local/openssl/cacert.pem
+        //openssl.capath = /usr/local/openssl/certs
+
         vendor('swiftmailer.swift_required');
 
         // 创建Transport对象，设置邮件服务器和端口号，并设置用户名和密码以供验证
