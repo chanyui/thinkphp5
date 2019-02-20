@@ -453,7 +453,7 @@ if (!function_exists('authcode')) {
     function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0)
     {
         $ckey_length = 4;
-        $key = md5($key ? $key : "da7b4db15be94a4c597a34f9cf902b01");
+        $key = md5($key ? $key : "3bcfc8f7288f12a7b4472cb2b77bf589");
         $keya = md5(substr($key, 0, 16));
         $keyb = md5(substr($key, 16, 16));
         $keyc = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length) : substr(md5(microtime()), -$ckey_length)) : '';
