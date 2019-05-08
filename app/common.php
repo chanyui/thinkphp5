@@ -1143,7 +1143,7 @@ if (!function_exists('getIdArr')) {
         $levelSet = 3;
         $db = M();
         $where = [
-            'if_show' => '1',
+            'if_show'  => '1',
             'store_id' => 0,
         ];
         //查看当前是否在最后一级分类
@@ -1608,5 +1608,152 @@ if (!function_exists('xunsearchDelIndex')) {
             // 添加到索引数据库中 几秒钟的延迟
             return $index->del($id);
         }
+    }
+}
+
+
+/**
+ * 对emoji表情转义
+ * @param $str
+ * @return string
+ */
+if (!function_exists('emoji_encode')) {
+    function emoji_encode($str)
+    {
+        $strEncode = '';
+        $length = mb_strlen($str, 'utf-8');
+        for ($i = 0; $i < $length; $i++) {
+            $_tmpStr = mb_substr($str, $i, 1, 'utf-8');
+            if (strlen($_tmpStr) >= 4) {
+                $strEncode .= '[[EMOJI:' . rawurlencode($_tmpStr) . ']]';
+            } else {
+                $strEncode .= $_tmpStr;
+            }
+        }
+        return $strEncode;
+    }
+}
+
+/**
+ * 对emoji表情转反义
+ * @param $str
+ * @return null|string|string[]
+ */
+if (!function_exists('emoji_decode')) {
+    function emoji_decode($str)
+    {
+        $strDecode = preg_replace_callback('|\[\[EMOJI:(.*?)\]\]|', function ($matches) {
+            return rawurldecode($matches[1]);
+        }, $str);
+        return $strDecode;
+    }
+}
+
+//时间格式化（时间戳）
+if (!function_exists('uc_time_ago')) {
+    function uc_time_ago($ptime)
+    {
+        date_default_timezone_set('PRC');
+        //$ptime = strtotime($ptime);
+        $etime = time() - $ptime;
+        switch ($etime) {
+            case $etime <= 60:
+                $msg = '刚刚';
+                break;
+            case $etime > 60 && $etime <= 60 * 60:
+                $msg = floor($etime / 60) . ' 分钟前';
+                break;
+            case $etime > 60 * 60 && $etime <= 24 * 60 * 60:
+                $msg = date('Ymd', $ptime) == date('Ymd', time()) ? '今天 ' . date('H:i', $ptime) : '昨天 ' . date('H:i', $ptime);
+                break;
+            case $etime > 24 * 60 * 60 && $etime <= 2 * 24 * 60 * 60:
+                $msg = date('Ymd', $ptime) + 1 == date('Ymd', time()) ? '昨天 ' . date('H:i', $ptime) : '前天 ' . date('H:i', $ptime);
+                break;
+            case $etime > 2 * 24 * 60 * 60 && $etime <= 12 * 30 * 24 * 60 * 60:
+                $msg = date('Y', $ptime) == date('Y', time()) ? date('m-d H:i', $ptime) : date('Y-m-d H:i', $ptime);
+                break;
+            default:
+                $msg = date('Y-m-d H:i', $ptime);
+        }
+        return $msg;
+    }
+}
+
+/**
+ * 根据唯一字段对两个二维数组取差集 数组中某个key是唯一的
+ *  - 去除$arr1 中 存在和$arr2相同的部分之后的内容
+ * - 返回差集数组
+ * @param $arr1
+ * @param $arr2
+ * @param string $pk
+ * @return array
+ */
+if (!function_exists('getDiffArrayByPk')) {
+    function getDiffArrayByPk($arr1, $arr2, $pk = 'title')
+    {
+        $res = [];
+        foreach ($arr2 as $item) {
+            $tmpArr[$item[$pk]] = $item;
+        }
+        foreach ($arr1 as $v) {
+            if (!isset($tmpArr[$v[$pk]])) {
+                $res[] = $v;
+            }
+        }
+        return $res;
+    }
+}
+
+/**
+ * 使用in_array()对两个二维数组取差集 没有唯一的key
+ *  - 去除$arr1 中 存在和$arr2相同的部分之后的内容
+ * @param $arr1
+ * @param $arr2
+ * @return array
+ */
+if (!function_exists('getDiffArrayByFilter')) {
+    function getDiffArrayByFilter($arr1, $arr2)
+    {
+        return array_filter(
+            $arr1, function ($v) use ($arr2) {
+            return !in_array($v, $arr2);
+        });
+    }
+}
+
+/**
+ * 对二维数组查询结果集进行排序
+ *
+ * @access public
+ * @param array $list 查询结果
+ * @param string $field 排序的字段名
+ * @param string $sortby 排序类型 （asc正向排序 desc逆向排序 nat自然排序）
+ * @return array
+ */
+if (!function_exists('listSortBy')) {
+    function listSortBy($list, $field, $sortby = 'asc')
+    {
+        if (is_array($list)) {
+            $refer = $resultSet = array();
+            foreach ($list as $i => $data) {
+                $refer[$i] = &$data[$field];
+            }
+            switch ($sortby) {
+                case 'asc': // 正向排序
+                    asort($refer);
+                    break;
+                case 'desc': // 逆向排序
+                    arsort($refer);
+                    break;
+                case 'nat': // 自然排序
+                    natcasesort($refer);
+                    break;
+            }
+            foreach ($refer as $key => $val) {
+                $resultSet[] = &$list[$key];
+            }
+            return $resultSet;
+        }
+        return [];
     }
 }
