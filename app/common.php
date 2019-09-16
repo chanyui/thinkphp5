@@ -1244,11 +1244,13 @@ if (function_exists('parseUpdate')) {
         $sql = '';
         $keys = array_keys(current($data));
         foreach ($keys as $column) {
-            $sql .= sprintf("`%s` = CASE `%s` \n", $column, $field);
-            foreach ($data as $line) {
-                $sql .= sprintf("WHEN '%s' THEN '%s' \n", $line[$field], $line[$column]);
+            if ($field != $column) {
+                $sql .= sprintf("`%s` = CASE `%s` \n", $column, $field);
+                foreach ($data as $line) {
+                    $sql .= sprintf("WHEN '%s' THEN '%s' \n", $line[$field], $line[$column]);
+                }
+                $sql .= "END,";
             }
-            $sql .= "END,";
         }
 
         return rtrim($sql, ',');
