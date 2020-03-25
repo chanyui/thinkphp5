@@ -950,6 +950,34 @@ if (!function_exists('formatSec')) {
     }
 }
 
+
+/**
+ * 快速排序法
+ */
+if (!function_exists('quick_sort')) {
+    function quick_sort($arr)
+    {
+        $count = count($arr);
+        if ($count <= 1) return $arr;
+        $key = $arr[0];
+        $left = $right = [];
+        for ($i = 0; $i < $count; $i++) {
+            if ($arr[$i] < $key) {
+                $left[] = $arr[$i];
+            } else {
+                $right[] = $arr[$i];
+            }
+        }
+        if (count($left) > 1) {
+            $left = quick_sort($left);
+        }
+        if (count($right)) {
+            $right = quick_sort($right);
+        }
+        return array_merge($left, [$key], $right);
+    }
+}
+
 /**
  * 冒泡排序算法
  * +----------------------------------------------------------
