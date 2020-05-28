@@ -6,12 +6,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/hightman/xs-sdk-php.git",
-            "reference": "4f72a676188199d15d23f5fedc20c9c5a44135de"
+            "reference": "d2faba65b9b4c0c0ea6e8b2ad5bafdefcbf3db87"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/hightman/xs-sdk-php/zipball/4f72a676188199d15d23f5fedc20c9c5a44135de",
-            "reference": "4f72a676188199d15d23f5fedc20c9c5a44135de",
+            "url": "https://api.github.com/repos/hightman/xs-sdk-php/zipball/d2faba65b9b4c0c0ea6e8b2ad5bafdefcbf3db87",
+            "reference": "d2faba65b9b4c0c0ea6e8b2ad5bafdefcbf3db87",
             "shasum": ""
         },
         "require": {
@@ -19,7 +19,7 @@
             "lib-pcre": "*",
             "php": ">=5.3.0"
         },
-        "time": "2018-09-30T01:07:43+00:00",
+        "time": "2019-11-01T02:17:32+00:00",
         "bin": [
             "util/xs"
         ],
@@ -61,72 +61,57 @@
     },
     {
         "name": "phpmailer/phpmailer",
-        "version": "v5.2.27",
-        "version_normalized": "5.2.27.0",
+        "version": "v6.1.6",
+        "version_normalized": "6.1.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPMailer/PHPMailer.git",
-            "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6"
+            "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/dde1db116511aa4956389d75546c5be4c2beb2a6",
-            "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6",
+            "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
+            "reference": "c2796cb1cb99d7717290b48c4e6f32cb6c60b7b3",
             "shasum": ""
         },
         "require": {
             "ext-ctype": "*",
-            "php": ">=5.0.0"
+            "ext-filter": "*",
+            "php": ">=5.5.0"
         },
         "require-dev": {
-            "doctrine/annotations": "1.2.*",
-            "jms/serializer": "0.16.*",
-            "phpdocumentor/phpdocumentor": "2.*",
-            "phpunit/phpunit": "4.8.*",
-            "symfony/debug": "2.8.*",
-            "symfony/filesystem": "2.8.*",
-            "symfony/translation": "2.8.*",
-            "symfony/yaml": "2.8.*",
-            "zendframework/zend-cache": "2.5.1",
-            "zendframework/zend-config": "2.5.1",
-            "zendframework/zend-eventmanager": "2.5.1",
-            "zendframework/zend-filter": "2.5.1",
-            "zendframework/zend-i18n": "2.5.1",
-            "zendframework/zend-json": "2.5.1",
-            "zendframework/zend-math": "2.5.1",
-            "zendframework/zend-serializer": "2.5.*",
-            "zendframework/zend-servicemanager": "2.5.*",
-            "zendframework/zend-stdlib": "2.5.1"
+            "doctrine/annotations": "^1.2",
+            "friendsofphp/php-cs-fixer": "^2.2",
+            "phpunit/phpunit": "^4.8 || ^5.7"
         },
         "suggest": {
-            "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+            "ext-mbstring": "Needed to send email in multibyte encoding charset",
+            "hayageek/oauth2-yahoo": "Needed for Yahoo XOAUTH2 authentication",
+            "league/oauth2-google": "Needed for Google XOAUTH2 authentication",
+            "psr/log": "For optional PSR-3 debug logging",
+            "stevenmaguire/oauth2-microsoft": "Needed for Microsoft XOAUTH2 authentication",
+            "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)"
         },
-        "time": "2018-11-15T22:32:31+00:00",
+        "time": "2020-05-27T12:24:03+00:00",
         "type": "library",
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
-            "classmap": [
-                "class.phpmailer.php",
-                "class.phpmaileroauth.php",
-                "class.phpmaileroauthgoogle.php",
-                "class.smtp.php",
-                "class.pop3.php",
-                "extras/EasyPeasyICS.php",
-                "extras/ntlm_sasl_client.php"
-            ]
+            "psr-4": {
+                "PHPMailer\\PHPMailer\\": "src/"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPL-2.1"
+            "LGPL-2.1-only"
         ],
         "authors": [
             {
-                "name": "Jim Jagielski",
-                "email": "jimjag@gmail.com"
-            },
-            {
                 "name": "Marcus Bointon",
                 "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
             },
             {
                 "name": "Andy Prevost",
@@ -140,25 +125,29 @@
     },
     {
         "name": "phpoffice/phpexcel",
-        "version": "1.8.1",
-        "version_normalized": "1.8.1.0",
+        "version": "1.8.2",
+        "version_normalized": "1.8.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/PHPOffice/PHPExcel.git",
-            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            "reference": "1441011fb7ecdd8cc689878f54f8b58a6805f870"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
-            "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+            "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/1441011fb7ecdd8cc689878f54f8b58a6805f870",
+            "reference": "1441011fb7ecdd8cc689878f54f8b58a6805f870",
             "shasum": ""
         },
         "require": {
+            "ext-mbstring": "*",
             "ext-xml": "*",
             "ext-xmlwriter": "*",
-            "php": ">=5.2.0"
+            "php": "^5.2|^7.0"
         },
-        "time": "2015-05-01T07:00:55+00:00",
+        "require-dev": {
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2018-11-22T23:07:24+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -168,7 +157,7 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "LGPL"
+            "LGPL-2.1"
         ],
         "authors": [
             {
@@ -176,18 +165,19 @@
                 "homepage": "http://blog.maartenballiauw.be"
             },
             {
-                "name": "Mark Baker"
+                "name": "Erik Tilt"
             },
             {
                 "name": "Franck Lefevre",
-                "homepage": "http://blog.rootslabs.net"
+                "homepage": "http://rootslabs.net"
             },
             {
-                "name": "Erik Tilt"
+                "name": "Mark Baker",
+                "homepage": "http://markbakeruk.net"
             }
         ],
         "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
-        "homepage": "http://phpexcel.codeplex.com",
+        "homepage": "https://github.com/PHPOffice/PHPExcel",
         "keywords": [
             "OpenXML",
             "excel",

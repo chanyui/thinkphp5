@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'hightman\\xunsearch\\' => array($vendorDir . '/hightman/xunsearch/wrapper/yii2-ext'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
 );

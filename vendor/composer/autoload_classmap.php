@@ -7,12 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'EXunSearch' => $vendorDir . '/hightman/xunsearch/wrapper/yii-ext/EXunSearch.php',
-    'EasyPeasyICS' => $vendorDir . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
-    'PHPMailer' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
-    'PHPMailerOAuth' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauth.php',
-    'PHPMailerOAuthGoogle' => $vendorDir . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
-    'POP3' => $vendorDir . '/phpmailer/phpmailer/class.pop3.php',
-    'SMTP' => $vendorDir . '/phpmailer/phpmailer/class.smtp.php',
     'XS' => $vendorDir . '/hightman/xunsearch/lib/XS.class.php',
     'XSCommand' => $vendorDir . '/hightman/xunsearch/lib/XSServer.class.php',
     'XSComponent' => $vendorDir . '/hightman/xunsearch/lib/XS.class.php',
@@ -31,6 +25,4 @@ return array(
     'XSTokenizerSplit' => $vendorDir . '/hightman/xunsearch/lib/XSTokenizer.class.php',
     'XSTokenizerXlen' => $vendorDir . '/hightman/xunsearch/lib/XSTokenizer.class.php',
     'XSTokenizerXstep' => $vendorDir . '/hightman/xunsearch/lib/XSTokenizer.class.php',
-    'ntlm_sasl_client_class' => $vendorDir . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
-    'phpmailerException' => $vendorDir . '/phpmailer/phpmailer/class.phpmailer.php',
 );

@@ -11,12 +11,20 @@ class ComposerStaticInit95e447876aae8f9388cb76a281f659d9
         array (
             'hightman\\xunsearch\\' => 19,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'hightman\\xunsearch\\' => 
         array (
             0 => __DIR__ . '/..' . '/hightman/xunsearch/wrapper/yii2-ext',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 
@@ -32,12 +40,6 @@ class ComposerStaticInit95e447876aae8f9388cb76a281f659d9
 
     public static $classMap = array (
         'EXunSearch' => __DIR__ . '/..' . '/hightman/xunsearch/wrapper/yii-ext/EXunSearch.php',
-        'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
-        'PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
-        'PHPMailerOAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauth.php',
-        'PHPMailerOAuthGoogle' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
-        'POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.pop3.php',
-        'SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.smtp.php',
         'XS' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XS.class.php',
         'XSCommand' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSServer.class.php',
         'XSComponent' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XS.class.php',
@@ -56,8 +58,6 @@ class ComposerStaticInit95e447876aae8f9388cb76a281f659d9
         'XSTokenizerSplit' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
         'XSTokenizerXlen' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
         'XSTokenizerXstep' => __DIR__ . '/..' . '/hightman/xunsearch/lib/XSTokenizer.class.php',
-        'ntlm_sasl_client_class' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
-        'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
