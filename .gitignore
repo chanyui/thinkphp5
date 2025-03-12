@@ -1,4 +1,14 @@
+/.env
+/thinkphp
 /.idea/
+/dump.rdb
+*.log
+.DS_Store
+.user.ini
+*.bak
+/.vscode/
+composer.lock
+.htaccess
 /runtime/
 /public/uploads
 thinkphp
